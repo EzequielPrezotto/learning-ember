@@ -1,5 +1,7 @@
-// app/models/song.js
+import {tracked} from '@glimmer/tracking';
+
 export default class Song {
+  @tracked rating;
   // constructor({ title, rating, band }) {
   constructor({ id, title, rating, band }, relationships={}) {
     this.id = id;
