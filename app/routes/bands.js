@@ -1,5 +1,6 @@
 import Route from '@ember/routing/route';
 import {inject as service} from '@ember/service';
+import wait from 'rarwee/utils/wait'
 
 export default class BandsRoute extends Route {
   @service catalog;
@@ -20,7 +21,10 @@ export default class BandsRoute extends Route {
   //   return this.catalog.bands;
   // }
 
-  model() {
+
+  async model() {
+    await wait(3000);
     return this.catalog.fetchAll('bands');
   }
+
 }

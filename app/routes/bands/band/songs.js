@@ -1,9 +1,19 @@
 // app/routes/bands/band/songs.js
 import Route from '@ember/routing/route';
 import {inject as service} from '@ember/service';
+import wait from 'rarwee/utils/wait'
 
 export default class BandsBandSongsRoute extends Route {
   @service catalog;
+
+  queryParams = {
+    sortBy: {
+      as: 's',
+    },
+    searchTerm: {
+      as: 'term',
+    },
+  }
 
   async model() {
     let band = this.modelFor('bands.band');
@@ -24,8 +34,11 @@ export default class BandsBandSongsRoute extends Route {
     // }
     // band.songs = songs;
 
+    await wait(3000)
     await this.catalog.fetchRelated(band, 'songs');
     return band;
+
+    // return Promise.reject()
   }
 
   resetController(controller) {
